@@ -17,6 +17,8 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        //SmsReveceiverBroadcast ishlashi uchun sms ga permission olinishi kk edi. Vaqtdan yutish uchun yozilmadi. Agar siz ushbu codeni ishlatmoqchi bo`lsangiz,
+        //permissionni qo`lda berib qo`ying!
         setContent {
             Broadcast_lesson1Theme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
