@@ -15,6 +15,7 @@ class ContextRegisteredReceiver : BroadcastReceiver() {
             Intent.ACTION_POWER_DISCONNECTED-> speakText(context,"Power disconnected")
             Intent.ACTION_SCREEN_ON-> speakText(context,"Screen on")
             Intent.ACTION_SCREEN_OFF-> speakText(context,"Screen off")
+            else->speakText(context,"${intent?.action}  and data is ${intent?.getStringExtra("data")}")
         }
 
     }
