@@ -1,5 +1,6 @@
 package uz.gita.broadcast_lesson1.presentation.service
 
+import android.Manifest
 import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -18,6 +19,7 @@ import androidx.core.app.NotificationCompat.PRIORITY_MIN
 import androidx.core.content.ContextCompat
 import uz.gita.broadcast_lesson1.R
 import uz.gita.broadcast_lesson1.presentation.receivers.ContextRegisteredReceiver
+import uz.gita.broadcast_lesson1.presentation.receivers.CustomReceiver
 import uz.gita.broadcast_lesson1.presentation.receivers.NotificationDismissedReceiver
 
 class ReceiverRegisterService : Service() {
@@ -26,6 +28,7 @@ class ReceiverRegisterService : Service() {
     private val notificationID = 101
     override fun onBind(intent: Intent?): IBinder? = null
     private val broadcast = ContextRegisteredReceiver()
+    private val customBroadcast = CustomReceiver()
     override fun onCreate() {
         super.onCreate()
 //        startForeground()
@@ -48,7 +51,7 @@ class ReceiverRegisterService : Service() {
         )
         ContextCompat.registerReceiver(
             this,
-            broadcast,
+            customBroadcast,
             actionCustomBroadcast,
             receiverFlag
         )
@@ -104,7 +107,7 @@ class ReceiverRegisterService : Service() {
         super.onDestroy()
         Toast.makeText(this, "onDestroy", Toast.LENGTH_LONG).show()
         unregisterReceiver(broadcast)
-
+        unregisterReceiver(customBroadcast)
     }
 
     private fun startForeground() {
